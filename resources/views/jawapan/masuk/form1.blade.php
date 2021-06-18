@@ -26,7 +26,7 @@ function do_email()
                     confirmButtonText: "Ok",
                     showConfirmButton: true,
                 }).then(function () {
-                    /*reload = window.location; 
+                    /*reload = window.location;
                     window.location = reload;*/
                     window.location.href = "";
                 });
@@ -108,7 +108,7 @@ $page=isset($_REQUEST["page"])?$_REQUEST["page"]:"";
                                 <label class="control-label col-md-2 col-xs-12" for="no_soalan"><b>Dewan :</b></label>
                                 <div class="col-md-2 col-sm-12 col-xs-12">{{ $soalan->dewan->dewan }}</div>
                             </div>
-							  
+
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-xs-12" for="tkh_soalan"><b>Pertanyaan Oleh :</b></label>
                                 <div class="col-md-10 col-sm-12 col-xs-12">{{ $ahliparlimen->nama_ap }}</div>
@@ -131,7 +131,7 @@ $page=isset($_REQUEST["page"])?$_REQUEST["page"]:"";
                             </div>
 
                             <hr />
-                            
+
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -167,12 +167,12 @@ $page=isset($_REQUEST["page"])?$_REQUEST["page"]:"";
                                             </td>
                                         </tr>
                                         @endforeach
-                                    </table> 
+                                    </table>
                                 </div>
                             </div>
-                            
+
                             <hr />
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12 col-sm-12 col-xs-12" align="center">
                                       <input type="button" name="button3" id="kembali" value="Kembali" class="btn btn-default" onclick="do_page()" />
@@ -180,12 +180,12 @@ $page=isset($_REQUEST["page"])?$_REQUEST["page"]:"";
 
                                       <input type="hidden" name="soalan_id" id="soalan_id" value="{{ $soalan->soalan_id }}" />
 								</div>
-                            </div>                        
+                            </div>
                         </div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>        
+	</div>
 </div>
 @endsection
