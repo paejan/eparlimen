@@ -55,7 +55,7 @@ class JawapanController extends Controller
         $kategori = $kategori->groupBy('kod_kategori.id_kategori')->distinct()->get();
 
         //Soalan
-        $soalan = SoalanParlimen::where('status', 1)->where('is_deleted', 0)->where('is_semak', 0)->where('type_soalan', 'S');
+        $soalan = SoalanParlimen::where('status', 1)->where('is_deleted', 0)->where('is_semak', 0);
 
         if ($type == 'B') {
             $soalan->where('kod_bahagian', Auth::user()->id_bahagian);
