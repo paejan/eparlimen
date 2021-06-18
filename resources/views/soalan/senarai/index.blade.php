@@ -37,7 +37,7 @@ function do_agih(ID){
 					  confirmButtonText: "Ok",
 					  showConfirmButton: true,
 					}).then(function () {
-						refresh = window.location; 
+						refresh = window.location;
 						window.location = refresh;
 					});
 				} else if(data=='ERR'){
@@ -52,7 +52,7 @@ function do_agih(ID){
 				}
 			}
 		});
-	});		
+	});
 }
 
 function do_cetak(id){
@@ -93,7 +93,7 @@ $l_cari=isset($_REQUEST["l_cari"])?$_REQUEST["l_cari"]:"";
       <input type="hidden" name="soalan_id" value="" />
       <div class="x_panel">
         <header class="panel-heading"  style="background: -webkit-linear-gradient(top, #00ced1 43%,#ffffff 100%);">
-          <h6 class="panel-title"><font color="#000000"><b>SENARAI MAKLUMAT DAFTAR SOALAN</b></font></h6> 
+          <h6 class="panel-title"><font color="#000000"><b>SENARAI MAKLUMAT DAFTAR SOALAN</b></font></h6>
         </header>
       </div>
     </div>
@@ -116,14 +116,14 @@ $l_cari=isset($_REQUEST["l_cari"])?$_REQUEST["l_cari"]:"";
             <option value="2" @if($lj_dewan == 2) selected @endif>Dewan Negara</option>
           </select>
         </div>
-                      
+
         <div class="col-md-8">
           <select name="ljid_sidang" id="ljid_sidang" onchange="do_page()" class="form-control">
             <option value="">Maklumat Persidangan</option>
             @foreach($sidang as $sid)
             <option value="{{ $sid->id_sidang }}" @if($ljid_sidang == $sid->id_sidang) selected @endif>{{ $sid->persidangan }} - [{{ strtoupper($sid->dewan) }}]</option>
             @endforeach
-            </select>                            
+            </select>
           </select>
         </div>
       </div>
@@ -152,7 +152,7 @@ $l_cari=isset($_REQUEST["l_cari"])?$_REQUEST["l_cari"]:"";
         <div class="col-md-2" align="right">
           <button type="button" class=" mb-xs mt-xs mr-xs btn btn-success" onclick="do_page()"><i class="fa fa-search"></i> Carian</button>
         </div>
-      </div>                    
+      </div>
     </div>
     <div align="right" style="padding-right:10px"><b>{{ $soalan->total() }} rekod dijumpai</b></div>
     <div class="box-body">
@@ -161,7 +161,7 @@ $l_cari=isset($_REQUEST["l_cari"])?$_REQUEST["l_cari"]:"";
           <tr style="background: -webkit-linear-gradient(top, #00ced1 43%,#ffffff 100%);">
             <th width="5%"><font color="#000000"><div align="left">Bil.</div></font></th>
             <th width="10%"><font color="#000000"><div align="left">Tarikh Jawapan<br />(No. Soalan)</div></font></th>
-            <th width="50%"><font color="#000000"><div align="left">Soalan</div></font></th>
+            <th width="50%"><font color="#000000"><div align="left">Soalan<br /><i>[Jenis]</i></div></font></th>
             <th width="10%"><font color="#000000"><div align="left">Dewan Persidangan</div></font></th>
             <th width="15%"><font color="#000000"><div align="left">Bahagian<br /><i>[Kategori]</i></div></font></th>
             <th width="10%"><font color="#000000"><div align="left">Status</div></font></th>
@@ -185,7 +185,12 @@ $l_cari=isset($_REQUEST["l_cari"])?$_REQUEST["l_cari"]:"";
               ({{ $soal->no_soalan }})<br /><br />{{ $soal->tanya->pertanyaan }}
             </td>
             <td valign="top" align="left">
-              <a href="/soalan/daftar/edit/{{$soal->soalan_id}}{{$soal->j_dewan}}">{!! nl2br($soal->soalan) !!}</a>
+              <a href="/soalan/daftar/edit/{{$soal->soalan_id}}{{$soal->j_dewan}}">{!! nl2br($soal->soalan) !!}</a><br />
+              @if ($soal->type_soalan == 'P')
+              <i>[Soalan Perbahasan]</i>
+              @elseif($soal->type_soalan == "S")
+              <i>[Soalan Dewan]</i>
+              @endif
             </td>
             <td valign="top" align="left">{{ $soal->dewan->dewan }}</td>
             <td valign="top" align="left">{{ optional($soal->bahagian)->nama_bahagian }}<br />
@@ -208,10 +213,10 @@ $l_cari=isset($_REQUEST["l_cari"])?$_REQUEST["l_cari"]:"";
               @if($soal->status == 0)
               <img src="{{ asset('images/animearrow.gif') }}" width="25" height="24" title="Hantar kepada bahagian" style="cursor:pointer" onclick="do_agih('{{ $soal->soalan_id }}')" /><br /><br />
               @endif
-              <font size=1 face=Verdana, Arial, Helvetica, sans-serif color="#000000"> 
-              <img src="{{ asset('images/user.gif') }}" width="25" height="24" style="cursor:pointer" border=0 onMouseOver="Tip('{{ $peg_1.'<br>' }}', 
+              <font size=1 face=Verdana, Arial, Helvetica, sans-serif color="#000000">
+              <img src="{{ asset('images/user.gif') }}" width="25" height="24" style="cursor:pointer" border=0 onMouseOver="Tip('{{ $peg_1.'<br>' }}',
               TITLE, 'Maklumat Penyedia Jawapan', ABOVE, true, SHADOW, true, LEFT, true, FADEIN, 400, FADEOUT, 400)"></font>
-      
+
             </td>
           </tr>
           @endforeach
@@ -223,6 +228,6 @@ $l_cari=isset($_REQUEST["l_cari"])?$_REQUEST["l_cari"]:"";
     {!! $soalan->appends(['lj_tanya'=>$lj_tanya,'lj_dewan'=>$lj_dewan,'ljid_sidang'=>$ljid_sidang,'lj_kategori'=>$lj_kategori,'lj_status'=>$lj_status,'l_cari'=>$l_cari])->render() !!}
   </div>
 </div>
-  <!--</div>-->    
+  <!--</div>-->
 <!-- DataTables -->
 @endsection
