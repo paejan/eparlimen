@@ -270,7 +270,13 @@ $page=isset($_REQUEST["page"])?$_REQUEST["page"]:"";
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-xs-12" for="tkh_soalan"><b>@if($soalan->j_dewan == 1) Parlimen @else Ahli Dewan @endif :</b></label>
-                                <div class="col-md-10 col-sm-12 col-xs-12">{{ $ahliparlimen->kawasan_ap }}</div>
+                                <div class="col-md-10 col-sm-12 col-xs-12">
+                                    @if ($soalan->j_dewan == 1)
+                                    {{ $ahliparlimen->p_nama }}
+                                    @else
+                                    {{ $ahliparlimen->kawasan_ap }}
+                                    @endif
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2 col-xs-12" for="tkh_soalan"><b>Kategori :</b></label>

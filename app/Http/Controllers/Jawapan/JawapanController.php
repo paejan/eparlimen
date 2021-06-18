@@ -203,7 +203,7 @@ class JawapanController extends Controller
     {
         // dd($request->all());
 
-        $user_input = SoalanInput::where('soalan_id', $request->soalan_id)->get();
+        $user_input = SoalanInput::where('soalan_id', $request->soalan_id)->where('is_delete', 1)->get();
         // dd($user_input);
 
         $user = [];
